@@ -1,36 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Singleton
 {
     /// <summary>
-    /// Singleton
+    ///     Singleton
     /// </summary>
     public sealed class TheBell
     {
         private static TheBell bellConnection;
-        private static object syncRoot = new Object();
+        private static readonly object syncRoot = new();
+
         private TheBell()
         {
-
         }
 
         /// <summary>
-        /// We implement this method to ensure thread safety for our singleton.
+        ///     We implement this method to ensure thread safety for our singleton.
         /// </summary>
         public static TheBell Instance
         {
             get
             {
-                lock(syncRoot)
+                lock (syncRoot)
                 {
-                    if(bellConnection == null)
-                    {
-                        bellConnection = new TheBell();
-                    }
+                    if (bellConnection == null) bellConnection = new TheBell();
                 }
 
                 return bellConnection;

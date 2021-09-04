@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Command
 {
-
     /// <summary>
-    /// The Invoker class
+    ///     The Invoker class
     /// </summary>
     public class Patron
     {
-        private OrderCommand _orderCommand;
         private MenuItem _menuItem;
-        private FastFoodOrder _order;
+        private readonly FastFoodOrder _order;
+        private OrderCommand _orderCommand;
 
         public Patron()
         {
@@ -43,41 +40,34 @@ namespace Command
     }
 
     /// <summary>
-    /// The Receiver
+    ///     The Receiver
     /// </summary>
     public class FastFoodOrder
     {
-        public List<MenuItem> currentItems { get; set; }
         public FastFoodOrder()
         {
             currentItems = new List<MenuItem>();
         }
 
+        public List<MenuItem> currentItems { get; set; }
+
         public void ExecuteCommand(OrderCommand command, MenuItem item)
         {
-            command.Execute(this.currentItems, item);
+            command.Execute(currentItems, item);
         }
 
         public void ShowCurrentItems()
         {
-            foreach(var item in currentItems)
-            {
-                item.Display();
-            }
+            foreach (var item in currentItems) item.Display();
             Console.WriteLine("-----------------------");
         }
-
     }
 
     /// <summary>
-    /// Represents an item being ordered from this restaurant.
+    ///     Represents an item being ordered from this restaurant.
     /// </summary>
     public class MenuItem
     {
-        public string Name { get; set; }
-        public int Amount { get; set; }
-        public double Price { get; set; }
-
         public MenuItem(string name, int amount, double price)
         {
             Name = name;
@@ -85,16 +75,20 @@ namespace Command
             Price = price;
         }
 
+        public int Amount { get; set; }
+        public string Name { get; set; }
+        public double Price { get; set; }
+
         public void Display()
         {
             Console.WriteLine("\nName: " + Name);
-            Console.WriteLine("Amount: " + Amount.ToString());
-            Console.WriteLine("Price: $" + Price.ToString());
+            Console.WriteLine("Amount: " + Amount);
+            Console.WriteLine("Price: $" + Price);
         }
     }
 
     /// <summary>
-    /// The Command abstract class
+    ///     The Command abstract class
     /// </summary>
     public abstract class OrderCommand
     {
@@ -102,7 +96,7 @@ namespace Command
     }
 
     /// <summary>
-    /// A concrete command
+    ///     A concrete command
     /// </summary>
     public class AddCommand : OrderCommand
     {
@@ -113,18 +107,18 @@ namespace Command
     }
 
     /// <summary>
-    /// A concrete command
+    ///     A concrete command
     /// </summary>
     public class RemoveCommand : OrderCommand
     {
         public override void Execute(List<MenuItem> currentItems, MenuItem newItem)
         {
-            currentItems.Remove(currentItems.Where(x=>x.Name == newItem.Name).First());
+            currentItems.Remove(currentItems.Where(x => x.Name == newItem.Name).First());
         }
     }
 
     /// <summary>
-    /// A concrete command
+    ///     A concrete command
     /// </summary>
     public class ModifyCommand : OrderCommand
     {

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Composite
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var colas = new Cola(210);
             colas.Flavors.Add(new VanillaCola(215));
@@ -20,7 +16,7 @@ namespace Composite
             rootBeers.Flavors.Add(new VanillaRootBeer(200));
             rootBeers.Flavors.Add(new StrawberryRootBeer(200));
 
-            SodaWater sodaWater = new SodaWater(180);
+            var sodaWater = new SodaWater(180);
             sodaWater.Flavors.Add(colas);
             sodaWater.Flavors.Add(lemonLime);
             sodaWater.Flavors.Add(rootBeers);

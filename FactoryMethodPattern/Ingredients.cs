@@ -1,62 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace FactoryMethod
 {
     /// <summary>
-    /// Product
+    ///     Product
     /// </summary>
-    abstract class Ingredient { }
-
-    /// <summary>
-    /// Concrete Product
-    /// </summary>
-    class Bread : Ingredient { }
-
-    /// <summary>
-    /// Concrete Product
-    /// </summary>
-    class Turkey : Ingredient { }
-
-    /// <summary>
-    /// Concrete Product
-    /// </summary>
-    class Lettuce : Ingredient { }
-
-    /// <summary>
-    /// Concrete Product
-    /// </summary>
-    class Mayonnaise : Ingredient { }
-
-
-    /// <summary>
-    /// Creator
-    /// </summary>
-    abstract class Sandwich
+    internal abstract class Ingredient
     {
-        private List<Ingredient> _ingredients = new List<Ingredient>();
+    }
 
+    /// <summary>
+    ///     Concrete Product
+    /// </summary>
+    internal class Bread : Ingredient
+    {
+    }
+
+    /// <summary>
+    ///     Concrete Product
+    /// </summary>
+    internal class Turkey : Ingredient
+    {
+    }
+
+    /// <summary>
+    ///     Concrete Product
+    /// </summary>
+    internal class Lettuce : Ingredient
+    {
+    }
+
+    /// <summary>
+    ///     Concrete Product
+    /// </summary>
+    internal class Mayonnaise : Ingredient
+    {
+    }
+
+    /// <summary>
+    ///     Creator
+    /// </summary>
+    internal abstract class Sandwich
+    {
         public Sandwich()
         {
             CreateIngredients();
         }
 
+        public List<Ingredient> Ingredients { get; } = new();
+
         //Factory method
         public abstract void CreateIngredients();
-
-        public List<Ingredient> Ingredients
-        {
-            get { return _ingredients; }
-        }
     }
 
     /// <summary>
-    /// Concrete Creator
+    ///     Concrete Creator
     /// </summary>
-    class TurkeySandwich : Sandwich
+    internal class TurkeySandwich : Sandwich
     {
         public override void CreateIngredients()
         {
@@ -70,9 +70,9 @@ namespace FactoryMethod
     }
 
     /// <summary>
-    /// Concrete Creator
+    ///     Concrete Creator
     /// </summary>
-    class Dagwood : Sandwich //OM NOM NOM
+    internal class Dagwood : Sandwich //OM NOM NOM
     {
         public override void CreateIngredients()
         {

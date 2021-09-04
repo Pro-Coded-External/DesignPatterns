@@ -1,54 +1,47 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mediator
 {
     /// <summary>
-    /// The Mediator interface, which defines a send message method which the concrete mediators must implement.
+    ///     The Mediator interface, which defines a send message method which the concrete mediators must implement.
     /// </summary>
-    interface Mediator
+    internal interface Mediator
     {
         void SendMessage(string message, ConcessionStand concessionStand);
     }
 
     /// <summary>
-    /// The Concrete Mediator class, which implement the send message method and keep track of all participants in the conversation.
+    ///     The Concrete Mediator class, which implement the send message method and keep track of all participants in the
+    ///     conversation.
     /// </summary>
-    class ConcessionsMediator : Mediator
+    internal class ConcessionsMediator : Mediator
     {
         private NorthConcessionStand _northConcessions;
         private SouthConcessionStand _southConcessions;
 
         public NorthConcessionStand NorthConcessions
         {
-            set { _northConcessions = value; }
+            set => _northConcessions = value;
         }
 
         public SouthConcessionStand SouthConcessions
         {
-            set { _southConcessions = value; }
+            set => _southConcessions = value;
         }
 
         public void SendMessage(string message, ConcessionStand colleague)
         {
             if (colleague == _northConcessions)
-            {
                 _southConcessions.Notify(message);
-            }
             else
-            {
                 _northConcessions.Notify(message);
-            }
         }
     }
 
     /// <summary>
-    /// The Colleague abstract class, representing an entity involved in the conversation which should receive messages.
+    ///     The Colleague abstract class, representing an entity involved in the conversation which should receive messages.
     /// </summary>
-    abstract class ConcessionStand
+    internal abstract class ConcessionStand
     {
         protected Mediator mediator;
 
@@ -59,9 +52,9 @@ namespace Mediator
     }
 
     /// <summary>
-    /// A Concrete Colleague class
+    ///     A Concrete Colleague class
     /// </summary>
-    class NorthConcessionStand : ConcessionStand
+    internal class NorthConcessionStand : ConcessionStand
     {
         // Constructor
         public NorthConcessionStand(Mediator mediator) : base(mediator)
@@ -76,14 +69,14 @@ namespace Mediator
 
         public void Notify(string message)
         {
-            Console.WriteLine("North Concession Stand gets message: "  + message);
+            Console.WriteLine("North Concession Stand gets message: " + message);
         }
     }
 
     /// <summary>
-    /// A Concrete Colleague class
+    ///     A Concrete Colleague class
     /// </summary>
-    class SouthConcessionStand : ConcessionStand
+    internal class SouthConcessionStand : ConcessionStand
     {
         public SouthConcessionStand(Mediator mediator) : base(mediator)
         {

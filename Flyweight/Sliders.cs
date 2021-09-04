@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flyweight
 {
     /// <summary>
-    /// The Flyweight Factory class
+    ///     The Flyweight Factory class
     /// </summary>
-    class SliderFactory
+    internal class SliderFactory
     {
-        private Dictionary<char, Slider> _sliders =
-            new Dictionary<char, Slider>();
+        private readonly Dictionary<char, Slider> _sliders =
+            new();
 
         public Slider GetSlider(char key)
         {
             Slider slider = null;
-            if (_sliders.ContainsKey(key)) //If we've already created an instance of the requested type of slider, just use that.
+            if (
+                _sliders.ContainsKey(
+                    key)) //If we've already created an instance of the requested type of slider, just use that.
             {
                 slider = _sliders[key];
             }
@@ -25,33 +24,41 @@ namespace Flyweight
             {
                 switch (key)
                 {
-                    case 'B': slider = new BaconMaster(); break;
-                    case 'V': slider = new VeggieSlider(); break;
-                    case 'Q': slider = new BBQKing(); break;
+                    case 'B':
+                        slider = new BaconMaster();
+                        break;
+                    case 'V':
+                        slider = new VeggieSlider();
+                        break;
+                    case 'Q':
+                        slider = new BBQKing();
+                        break;
                 }
+
                 _sliders.Add(key, slider);
             }
+
             return slider;
         }
     }
 
     /// <summary>
-    /// The 'Flyweight' abstract class
+    ///     The 'Flyweight' abstract class
     /// </summary>
-    abstract class Slider
+    internal abstract class Slider
     {
-        protected string Name;
         protected string Cheese;
-        protected string Toppings;
+        protected string Name;
         protected decimal Price;
+        protected string Toppings;
 
         public abstract void Display(int orderTotal);
     }
 
     /// <summary>
-    /// A  Concrete Flyweight class
+    ///     A  Concrete Flyweight class
     /// </summary>
-    class BaconMaster : Slider
+    internal class BaconMaster : Slider
     {
         public BaconMaster()
         {
@@ -63,14 +70,15 @@ namespace Flyweight
 
         public override void Display(int orderTotal)
         {
-            Console.WriteLine("Slider #" + orderTotal + ": " + Name + " - topped with " + Cheese + " cheese and " + Toppings + "! $" + Price.ToString());
+            Console.WriteLine("Slider #" + orderTotal + ": " + Name + " - topped with " + Cheese + " cheese and " +
+                              Toppings + "! $" + Price);
         }
     }
 
     /// <summary>
-    /// A Concrete Flyweight class
+    ///     A Concrete Flyweight class
     /// </summary>
-    class VeggieSlider : Slider
+    internal class VeggieSlider : Slider
     {
         public VeggieSlider()
         {
@@ -82,15 +90,15 @@ namespace Flyweight
 
         public override void Display(int orderTotal)
         {
-            Console.WriteLine("Slider #" + orderTotal + ": " + Name + " - topped with " + Cheese + " cheese and " + Toppings + "! $" + Price.ToString());
+            Console.WriteLine("Slider #" + orderTotal + ": " + Name + " - topped with " + Cheese + " cheese and " +
+                              Toppings + "! $" + Price);
         }
-
     }
 
     /// <summary>
-    /// A Concrete Flyweight class
+    ///     A Concrete Flyweight class
     /// </summary>
-    class BBQKing : Slider
+    internal class BBQKing : Slider
     {
         public BBQKing()
         {
@@ -102,7 +110,8 @@ namespace Flyweight
 
         public override void Display(int orderTotal)
         {
-            Console.WriteLine("Slider #" + orderTotal + ": " + Name + " - topped with " + Cheese + " cheese and " + Toppings + "! $" + Price.ToString());
+            Console.WriteLine("Slider #" + orderTotal + ": " + Name + " - topped with " + Cheese + " cheese and " +
+                              Toppings + "! $" + Price);
         }
     }
 }

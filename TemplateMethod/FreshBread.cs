@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TemplateMethod
 {
     /// <summary>
-    /// The AbstractClass which contains the template method.
+    ///     The AbstractClass which contains the template method.
     /// </summary>
-    abstract class Bread
+    internal abstract class Bread
     {
         public abstract void MixIngredients();
 
@@ -29,7 +25,7 @@ namespace TemplateMethod
         }
     }
 
-    class TwelveGrain : Bread
+    internal class TwelveGrain : Bread
     {
         public override void MixIngredients()
         {
@@ -42,7 +38,7 @@ namespace TemplateMethod
         }
     }
 
-    class Sourdough : Bread
+    internal class Sourdough : Bread
     {
         public override void MixIngredients()
         {
@@ -55,7 +51,7 @@ namespace TemplateMethod
         }
     }
 
-    class WholeWheat : Bread
+    internal class WholeWheat : Bread
     {
         public override void MixIngredients()
         {

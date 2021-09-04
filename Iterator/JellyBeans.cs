@@ -1,90 +1,76 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 
 namespace Iterator
 {
     /// <summary>
-    /// Our collection item.  Mostly because I'm a sucker for jelly beans.
+    ///     Our collection item.  Mostly because I'm a sucker for jelly beans.
     /// </summary>
-    class JellyBean
+    internal class JellyBean
     {
-        private string _flavor;
-
         // Constructor
         public JellyBean(string flavor)
         {
-            this._flavor = flavor;
+            Flavor = flavor;
         }
 
-        
-        public string Flavor
-        {
-            get { return _flavor; }
-        }
+        public string Flavor { get; }
     }
 
     /// <summary>
-    /// The aggregate interface
+    ///     The aggregate interface
     /// </summary>
-    interface ICandyCollection
+    internal interface ICandyCollection
     {
         JellyBeanIterator CreateIterator();
     }
 
     /// <summary>
-    /// The concrete aggregate class
+    ///     The concrete aggregate class
     /// </summary>
-    class JellyBeanCollection : ICandyCollection
+    internal class JellyBeanCollection : ICandyCollection
     {
-        private ArrayList _items = new ArrayList();
+        private readonly ArrayList _items = new();
+
+        // Gets jelly bean count
+        public int Count => _items.Count;
+
+        // Indexer
+        public object this[int index]
+        {
+            get => _items[index];
+            set => _items.Add(value);
+        }
 
         public JellyBeanIterator CreateIterator()
         {
             return new JellyBeanIterator(this);
         }
-
-        // Gets jelly bean count
-        public int Count
-        {
-            get { return _items.Count; }
-        }
-
-        // Indexer
-        public object this[int index]
-        {
-            get { return _items[index]; }
-            set { _items.Add(value); }
-        }
     }
 
     /// <summary>
-    /// The 'Iterator' interface
+    ///     The 'Iterator' interface
     /// </summary>
-    interface IJellyBeanIterator
+    internal interface IJellyBeanIterator
     {
+        JellyBean CurrentBean { get; }
+        bool IsDone { get; }
         JellyBean First();
         JellyBean Next();
-        bool IsDone { get; }
-        JellyBean CurrentBean { get; }
     }
 
     /// <summary>
-    /// The 'ConcreteIterator' class
+    ///     The 'ConcreteIterator' class
     /// </summary>
-    class JellyBeanIterator : IJellyBeanIterator
+    internal class JellyBeanIterator : IJellyBeanIterator
     {
-        private JellyBeanCollection _jellyBeans;
-        private int _current = 0;
-        private int _step = 1;
+        private int _current;
+        private readonly JellyBeanCollection _jellyBeans;
+        private readonly int _step = 1;
 
         // Constructor
         public JellyBeanIterator(JellyBeanCollection beans)
         {
-            this._jellyBeans = beans;
+            _jellyBeans = beans;
         }
 
         // Gets first jelly bean
@@ -100,20 +86,13 @@ namespace Iterator
             _current += _step;
             if (!IsDone)
                 return _jellyBeans[_current] as JellyBean;
-            else
-                return null;
+            return null;
         }
 
         // Gets current iterator candy
-        public JellyBean CurrentBean
-        {
-            get { return _jellyBeans[_current] as JellyBean; }
-        }
+        public JellyBean CurrentBean => _jellyBeans[_current] as JellyBean;
 
         // Gets whether iteration is complete
-        public bool IsDone
-        {
-            get { return _current >= _jellyBeans.Count; }
-        }
+        public bool IsDone => _current >= _jellyBeans.Count;
     }
 }

@@ -1,32 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace State
 {
     /// <summary>
-    /// The State abstract class
+    ///     The State abstract class
     /// </summary>
-    abstract class Doneness
+    internal abstract class Doneness
     {
-        protected Steak steak;
+        protected bool canEat;
         protected double currentTemp;
         protected double lowerTemp;
+        protected Steak steak;
         protected double upperTemp;
-        protected bool canEat;
-
-        public Steak Steak
-        {
-            get { return steak; }
-            set { steak = value; }
-        }
 
         public double CurrentTemp
         {
-            get { return currentTemp; }
-            set { currentTemp = value; }
+            get => currentTemp;
+            set => currentTemp = value;
+        }
+
+        public Steak Steak
+        {
+            get => steak;
+            set => steak = value;
         }
 
         public abstract void AddTemp(double temp);
@@ -34,11 +30,10 @@ namespace State
         public abstract void DonenessCheck();
     }
 
-
     /// <summary>
-    /// A Concrete State class.
+    ///     A Concrete State class.
     /// </summary>
-    class Uncooked : Doneness
+    internal class Uncooked : Doneness
     {
         public Uncooked(Doneness state)
         {
@@ -68,17 +63,14 @@ namespace State
 
         public override void DonenessCheck()
         {
-            if (currentTemp > upperTemp)
-            {
-                steak.State = new Rare(this);
-            }
+            if (currentTemp > upperTemp) steak.State = new Rare(this);
         }
     }
 
     /// <summary>
-    /// A 'ConcreteState' class.
+    ///     A 'ConcreteState' class.
     /// </summary>
-    class Rare : Doneness
+    internal class Rare : Doneness
     {
         public Rare(Doneness state) : this(state.CurrentTemp, state.Steak)
         {
@@ -113,20 +105,15 @@ namespace State
         public override void DonenessCheck()
         {
             if (currentTemp < lowerTemp)
-            {
                 steak.State = new Uncooked(this);
-            }
-            else if (currentTemp > upperTemp)
-            {
-                steak.State = new MediumRare(this);
-            }
+            else if (currentTemp > upperTemp) steak.State = new MediumRare(this);
         }
     }
 
     /// <summary>
-    /// A Concrete State class
+    ///     A Concrete State class
     /// </summary>
-    class MediumRare : Doneness
+    internal class MediumRare : Doneness
     {
         public MediumRare(Doneness state) : this(state.CurrentTemp, state.Steak)
         {
@@ -161,24 +148,17 @@ namespace State
         public override void DonenessCheck()
         {
             if (currentTemp < 0.0)
-            {
                 steak.State = new Uncooked(this);
-            }
             else if (currentTemp < lowerTemp)
-            {
                 steak.State = new Rare(this);
-            }
-            else if (currentTemp > upperTemp)
-            {
-                steak.State = new Medium(this);
-            }
+            else if (currentTemp > upperTemp) steak.State = new Medium(this);
         }
     }
 
     /// <summary>
-    /// A Concrete State class
+    ///     A Concrete State class
     /// </summary>
-    class Medium : Doneness
+    internal class Medium : Doneness
     {
         public Medium(Doneness state) : this(state.CurrentTemp, state.Steak)
         {
@@ -213,24 +193,17 @@ namespace State
         public override void DonenessCheck()
         {
             if (currentTemp < 130)
-            {
                 steak.State = new Uncooked(this);
-            }
             else if (currentTemp < lowerTemp)
-            {
                 steak.State = new MediumRare(this);
-            }
-            else if (currentTemp > upperTemp)
-            {
-                steak.State = new Ruined(this);
-            }
+            else if (currentTemp > upperTemp) steak.State = new Ruined(this);
         }
     }
 
     /// <summary>
-    /// A Concrete State class
+    ///     A Concrete State class
     /// </summary>
-    class Ruined : Doneness
+    internal class Ruined : Doneness
     {
         public Ruined(Doneness state) : this(state.CurrentTemp, state.Steak)
         {
@@ -265,44 +238,31 @@ namespace State
         public override void DonenessCheck()
         {
             if (currentTemp < 0)
-            {
                 steak.State = new Uncooked(this);
-            }
-            else if (currentTemp < lowerTemp)
-            {
-                steak.State = new Medium(this);
-            }
+            else if (currentTemp < lowerTemp) steak.State = new Medium(this);
         }
     }
 
     /// <summary>
-    /// The Context class
+    ///     The Context class
     /// </summary>
-    class Steak
+    internal class Steak
     {
-        private Doneness _state;
         private string _beefCut;
 
         public Steak(string beefCut)
         {
             _beefCut = beefCut;
-            _state = new Rare(0.0, this);
+            State = new Rare(0.0, this);
         }
 
-        public double CurrentTemp
-        {
-            get { return _state.CurrentTemp; }
-        }
+        public double CurrentTemp => State.CurrentTemp;
 
-        public Doneness State
-        {
-            get { return _state; }
-            set { _state = value; }
-        }
+        public Doneness State { get; set; }
 
         public void AddTemp(double amount)
         {
-            _state.AddTemp(amount);
+            State.AddTemp(amount);
             Console.WriteLine("Increased temperature by {0} degrees.", amount);
             Console.WriteLine(" Current temp is {0}", CurrentTemp);
             Console.WriteLine(" Status is {0}", State.GetType().Name);
@@ -311,7 +271,7 @@ namespace State
 
         public void RemoveTemp(double amount)
         {
-            _state.RemoveTemp(amount);
+            State.RemoveTemp(amount);
             Console.WriteLine("Decreased temperature by {0} degrees.", amount);
             Console.WriteLine(" Current temp is {0}", CurrentTemp);
             Console.WriteLine(" Status is {0}", State.GetType().Name);

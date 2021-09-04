@@ -1,25 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mediator
 {
-    class Program
+    internal class Program
     {
         /// <summary>
-        /// The Mediator pattern allows us to create an object which defines how other objects interact or 
-        /// communicate with each other.  This pattern promotes loose coupling by keeping the interacting
-        /// objects from referring to each other explicitly.
+        ///     The Mediator pattern allows us to create an object which defines how other objects interact or
+        ///     communicate with each other.  This pattern promotes loose coupling by keeping the interacting
+        ///     objects from referring to each other explicitly.
         /// </summary>
         /// <param name="args"></param>
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            ConcessionsMediator mediator = new ConcessionsMediator();
+            var mediator = new ConcessionsMediator();
 
-            NorthConcessionStand leftKitchen = new NorthConcessionStand(mediator);
-            SouthConcessionStand rightKitchen = new SouthConcessionStand(mediator);
+            var leftKitchen = new NorthConcessionStand(mediator);
+            var rightKitchen = new SouthConcessionStand(mediator);
 
             mediator.NorthConcessions = leftKitchen;
             mediator.SouthConcessions = rightKitchen;

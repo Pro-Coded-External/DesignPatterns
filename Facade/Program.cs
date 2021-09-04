@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Facade
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Server server = new Server();
+            var server = new Server();
 
             Console.WriteLine("Hello!  I'll be your server today. What is your name?");
             var name = Console.ReadLine();
 
-            Patron patron = new Patron(name);
+            var patron = new Patron(name);
 
             Console.WriteLine("Hello " + patron.Name + ". What appetizer would you like? (1-15):");
             var appID = int.Parse(Console.ReadLine());

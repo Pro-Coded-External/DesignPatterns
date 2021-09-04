@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bridge
 {
     /// <summary>
-    /// Implementor which defines an interface for placing an order
+    ///     Implementor which defines an interface for placing an order
     /// </summary>
     public interface IOrderingSystem
     {
@@ -15,7 +11,7 @@ namespace Bridge
     }
 
     /// <summary>
-    /// Abstraction which represents the sent order and maintains a reference to the restaurant where the order is going.
+    ///     Abstraction which represents the sent order and maintains a reference to the restaurant where the order is going.
     /// </summary>
     public abstract class SendOrder
     {
@@ -26,7 +22,7 @@ namespace Bridge
     }
 
     /// <summary>
-    /// Refined abstraction for a dairy-free order
+    ///     Refined abstraction for a dairy-free order
     /// </summary>
     public class SendDairyFreeOrder : SendOrder
     {
@@ -37,7 +33,7 @@ namespace Bridge
     }
 
     /// <summary>
-    /// Refined abstraction for a gluten free order
+    ///     Refined abstraction for a gluten free order
     /// </summary>
     public class SendGlutenFreeOrder : SendOrder
     {
@@ -48,7 +44,7 @@ namespace Bridge
     }
 
     /// <summary>
-    /// Concrete implementor for an ordering system at a diner.
+    ///     Concrete implementor for an ordering system at a diner.
     /// </summary>
     public class DinerOrders : IOrderingSystem
     {
@@ -59,7 +55,7 @@ namespace Bridge
     }
 
     /// <summary>
-    /// Concrete implementor for an ordering system at a fancy restaurant.
+    ///     Concrete implementor for an ordering system at a fancy restaurant.
     /// </summary>
     public class FancyRestaurantOrders : IOrderingSystem
     {

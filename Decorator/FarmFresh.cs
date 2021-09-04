@@ -1,27 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Decorator
 {
     /// <summary>
-    /// The abstract Component class
+    ///     The abstract Component class
     /// </summary>
-    abstract class RestaurantDish
+    internal abstract class RestaurantDish
     {
         public abstract void Display();
     }
 
     /// <summary>
-    /// A Concrete component class
+    ///     A Concrete component class
     /// </summary>
-    class FreshSalad : RestaurantDish
+    internal class FreshSalad : RestaurantDish
     {
-        private string _greens;
-        private string _cheese; //I am going to use this pun everywhere I can
-        private string _dressing;
+        private readonly string _cheese; //I am going to use this pun everywhere I can
+        private readonly string _dressing;
+        private readonly string _greens;
 
         public FreshSalad(string greens, string cheese, string dressing)
         {
@@ -40,12 +37,12 @@ namespace Decorator
     }
 
     /// <summary>
-    /// A Concrete component class
+    ///     A Concrete component class
     /// </summary>
-    class Pasta : RestaurantDish
+    internal class Pasta : RestaurantDish
     {
-        private string _pastaType;
-        private string _sauce;
+        private readonly string _pastaType;
+        private readonly string _sauce;
 
         public Pasta(string pastaType, string sauce)
         {
@@ -62,9 +59,9 @@ namespace Decorator
     }
 
     /// <summary>
-    /// The abstract Decorator class.  
+    ///     The abstract Decorator class.
     /// </summary>
-    abstract class Decorator : RestaurantDish
+    internal abstract class Decorator : RestaurantDish
     {
         protected RestaurantDish _dish;
 
@@ -80,16 +77,19 @@ namespace Decorator
     }
 
     /// <summary>
-    /// A concrete Decorator. This class will impart "responsibilities" onto the dishes (e.g. whether or not those dishes have enough ingredients left to order them)
+    ///     A concrete Decorator. This class will impart "responsibilities" onto the dishes (e.g. whether or not those dishes
+    ///     have enough ingredients left to order them)
     /// </summary>
-    class Available : Decorator
+    internal class Available : Decorator
     {
-        public int NumAvailable { get; set; } //How many can we make?
-            protected List<string> customers = new List<string>();
+        protected List<string> customers = new();
+
         public Available(RestaurantDish dish, int numAvailable) : base(dish)
         {
-                NumAvailable = numAvailable;
+            NumAvailable = numAvailable;
         }
+
+        public int NumAvailable { get; set; } //How many can we make?
 
         public void OrderItem(string name)
         {
@@ -108,10 +108,7 @@ namespace Decorator
         {
             base.Display();
 
-            foreach(var customer in customers)
-            {
-                Console.WriteLine("Ordered by " + customer);
-            }
+            foreach (var customer in customers) Console.WriteLine("Ordered by " + customer);
         }
     }
 }

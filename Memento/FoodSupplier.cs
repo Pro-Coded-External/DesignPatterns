@@ -1,23 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Memento
 {
     /// <summary>
-    /// The Originator class, which is the class for which we want to save Mementos for its state.
+    ///     The Originator class, which is the class for which we want to save Mementos for its state.
     /// </summary>
-    class FoodSupplier
+    internal class FoodSupplier
     {
+        private string _address;
         private string _name;
         private string _phone;
-        private string _address;
+
+        public string Address
+        {
+            get => _address;
+            set
+            {
+                _address = value;
+                Console.WriteLine("Address: " + _address);
+            }
+        }
 
         public string Name
         {
-            get { return _name; }
+            get => _name;
             set
             {
                 _name = value;
@@ -27,21 +33,11 @@ namespace Memento
 
         public string Phone
         {
-            get { return _phone; }
+            get => _phone;
             set
             {
                 _phone = value;
                 Console.WriteLine("Phone Number: " + _phone);
-            }
-        }
-
-        public string Address
-        {
-            get { return _address; }
-            set
-            {
-                _address = value;
-                Console.WriteLine("Address: " + _address);
             }
         }
 
@@ -61,34 +57,28 @@ namespace Memento
     }
 
     /// <summary>
-    /// The Memento class
+    ///     The Memento class
     /// </summary>
-    class FoodSupplierMemento
+    internal class FoodSupplierMemento
     {
-        public string Name { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Address { get; set; }
-
         public FoodSupplierMemento(string name, string phone, string address)
         {
             Name = name;
             PhoneNumber = phone;
             Address = address;
         }
+
+        public string Address { get; set; }
+        public string Name { get; set; }
+        public string PhoneNumber { get; set; }
     }
 
     /// <summary>
-    /// The Caretaker class.  This class never examines the contents of any Memento and is
-    /// responsible for keeping that memento.
+    ///     The Caretaker class.  This class never examines the contents of any Memento and is
+    ///     responsible for keeping that memento.
     /// </summary>
-    class SupplierMemory
+    internal class SupplierMemory
     {
-        private FoodSupplierMemento _memento;
-
-        public FoodSupplierMemento Memento
-        {
-            set { _memento = value; }
-            get { return _memento; }
-        }
+        public FoodSupplierMemento Memento { set; get; }
     }
 }

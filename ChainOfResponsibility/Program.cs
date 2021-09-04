@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChainOfResponsibility
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //Create the chain links
             Approver jennifer = new HeadChef();
@@ -20,7 +16,7 @@ namespace ChainOfResponsibility
             mitchell.SetSupervisor(olivia);
 
             // Generate and process purchase requests
-            PurchaseOrder p = new PurchaseOrder(1, 20, 69, "Spices");
+            var p = new PurchaseOrder(1, 20, 69, "Spices");
             jennifer.ProcessRequest(p);
 
             p = new PurchaseOrder(2, 300, 1389, "Fresh Veggies");

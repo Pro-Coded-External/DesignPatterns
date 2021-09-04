@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Adapter
 {
@@ -11,16 +7,16 @@ namespace Adapter
         Fahrenheit,
         Celsius
     }
+
     /// <summary>
-    /// The legacy API which must be converted to the new structure (aka the Adaptee participant)
+    ///     The legacy API which must be converted to the new structure (aka the Adaptee participant)
     /// </summary>
-    class MeatDatabase
+    internal class MeatDatabase
     {
         // Temps from http://www.foodsafety.gov/keep/charts/mintemp.html
         public float GetSafeCookTemp(string meat, TemperatureType tempType)
         {
             if (tempType == TemperatureType.Fahrenheit)
-            {
                 switch (meat)
                 {
                     case "beef":
@@ -34,23 +30,20 @@ namespace Adapter
                     default:
                         return 165f;
                 }
-            }
-            else
+
+            switch (meat)
             {
-                switch (meat)
-                {
-                    case "beef":
-                    case "veal":
-                    case "pork":
-                        return 63f;
+                case "beef":
+                case "veal":
+                case "pork":
+                    return 63f;
 
-                    case "chicken":
-                    case "turkey":
-                        return 74f;
+                case "chicken":
+                case "turkey":
+                    return 74f;
 
-                    default:
-                        return 74f;
-                }
+                default:
+                    return 74f;
             }
         }
 
@@ -80,20 +73,20 @@ namespace Adapter
     }
 
     /// <summary>
-    /// The Target participant, which represents details about a particular kind of meat.
+    ///     The Target participant, which represents details about a particular kind of meat.
     /// </summary>
-    class Meat
+    internal class Meat
     {
-        protected string MeatName;
-        protected float SafeCookTempFahrenheit;
-        protected float SafeCookTempCelsius;
         protected double CaloriesPerOunce;
+        protected string MeatName;
         protected double ProteinPerOunce;
+        protected float SafeCookTempCelsius;
+        protected float SafeCookTempFahrenheit;
 
         // Constructor
         public Meat(string meat)
         {
-            this.MeatName = meat;
+            MeatName = meat;
         }
 
         public virtual void LoadData()
@@ -103,15 +96,15 @@ namespace Adapter
     }
 
     /// <summary>
-    /// The Adapter class, which wraps the Meat class and initializes that class's values.
+    ///     The Adapter class, which wraps the Meat class and initializes that class's values.
     /// </summary>
-    class MeatDetails : Meat
+    internal class MeatDetails : Meat
     {
         private MeatDatabase _meatDatabase;
 
         // Constructor
         public MeatDetails(string name)
-          : base(name)
+            : base(name)
         {
         }
 

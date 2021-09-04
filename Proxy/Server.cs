@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Proxy
 {
     /// <summary>
-    /// The Subject interface which both the real subject and proxy will need to implement
+    ///     The Subject interface which both the real subject and proxy will need to implement
     /// </summary>
     public interface IServer
     {
@@ -17,11 +13,12 @@ namespace Proxy
     }
 
     /// <summary>
-    /// The real subject class which the Proxy can stand in for
+    ///     The real subject class which the Proxy can stand in for
     /// </summary>
-    class Server : IServer
+    internal class Server : IServer
     {
         private string Order;
+
         public void TakeOrder(string order)
         {
             Console.WriteLine("Server takes order for " + order + ".");
@@ -40,12 +37,12 @@ namespace Proxy
     }
 
     /// <summary>
-    /// The Proxy class, which can substitute for the Real Subject.
+    ///     The Proxy class, which can substitute for the Real Subject.
     /// </summary>
-    class NewServerProxy : IServer
+    internal class NewServerProxy : IServer
     {
+        private readonly Server _server = new();
         private string Order;
-        private Server _server = new Server();
 
         public void TakeOrder(string order)
         {

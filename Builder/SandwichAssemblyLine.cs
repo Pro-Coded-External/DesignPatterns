@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Builder
 {
     /// <summary>
-    /// The Director
+    ///     The Director
     /// </summary>
-    class AssemblyLine
+    internal class AssemblyLine
     {
         // Builder uses a complex series of steps
         // 
@@ -24,17 +21,14 @@ namespace Builder
     }
 
     /// <summary>
-    /// The Builder abstract class
+    ///     The Builder abstract class
     /// </summary>
-    abstract class SandwichBuilder
+    internal abstract class SandwichBuilder
     {
         protected Sandwich sandwich;
 
         // Gets sandwich instance
-        public Sandwich Sandwich
-        {
-            get { return sandwich; }
-        }
+        public Sandwich Sandwich => sandwich;
 
         // Abstract build methods
         public abstract void AddBread();
@@ -45,9 +39,9 @@ namespace Builder
     }
 
     /// <summary>
-    /// A Concrete Builder class
+    ///     A Concrete Builder class
     /// </summary>
-    class TurkeyClub : SandwichBuilder
+    internal class TurkeyClub : SandwichBuilder
     {
         public TurkeyClub()
         {
@@ -80,11 +74,10 @@ namespace Builder
         }
     }
 
-
     /// <summary>
-    /// A Concrete Builder class
+    ///     A Concrete Builder class
     /// </summary>
-    class BLT : SandwichBuilder
+    internal class BLT : SandwichBuilder
     {
         public BLT()
         {
@@ -118,9 +111,9 @@ namespace Builder
     }
 
     /// <summary>
-    /// A Concrete Builder class
+    ///     A Concrete Builder class
     /// </summary>
-    class HamAndCheese : SandwichBuilder
+    internal class HamAndCheese : SandwichBuilder
     {
         public HamAndCheese()
         {
@@ -154,24 +147,24 @@ namespace Builder
     }
 
     /// <summary>
-    /// The Product class
+    ///     The Product class
     /// </summary>
-    class Sandwich
+    internal class Sandwich
     {
-        private string _sandwichType;
-        private Dictionary<string, string> _ingredients = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> _ingredients = new();
+        private readonly string _sandwichType;
 
         // Constructor
         public Sandwich(string sandwichType)
         {
-            this._sandwichType = sandwichType;
+            _sandwichType = sandwichType;
         }
 
         // Indexer
         public string this[string key]
         {
-            get { return _ingredients[key]; }
-            set { _ingredients[key] = value; }
+            get => _ingredients[key];
+            set => _ingredients[key] = value;
         }
 
         public void Show()

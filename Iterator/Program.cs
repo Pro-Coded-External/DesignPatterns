@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Iterator
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             // Build a collection of jelly beans
-            JellyBeanCollection collection = new JellyBeanCollection();
+            var collection = new JellyBeanCollection();
             collection[0] = new JellyBean("Cherry");
             collection[1] = new JellyBean("Bubble Gum");
             collection[2] = new JellyBean("Root Beer");
@@ -23,15 +19,14 @@ namespace Iterator
             collection[8] = new JellyBean("Coconut");
 
             // Create iterator
-            JellyBeanIterator iterator = collection.CreateIterator();
+            var iterator = collection.CreateIterator();
 
             Console.WriteLine("Gimme all the jelly beans!");
 
-            for (JellyBean item = iterator.First();
-                !iterator.IsDone; item = iterator.Next())
-            {
+            for (var item = iterator.First();
+                !iterator.IsDone;
+                item = iterator.Next())
                 Console.WriteLine(item.Flavor);
-            }
 
             Console.ReadKey();
         }
