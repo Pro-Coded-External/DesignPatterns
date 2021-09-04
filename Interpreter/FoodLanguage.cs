@@ -1,44 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Interpreter
+﻿namespace Interpreter
 {
     /// <summary>
-    /// The 'Context' class
+    ///     The 'Context' class
     /// </summary>
-    class Context
+    internal class Context
     {
-        private string _input;
-        private int _output;
-
         // Constructor
         public Context(string input)
         {
-            this._input = input;
+            Input = input;
         }
 
         // Gets or sets input
-        public string Input
-        {
-            get { return _input; }
-            set { _input = value; }
-        }
+        public string Input { get; set; }
 
         // Gets or sets output
-        public int Output
-        {
-            get { return _output; }
-            set { _output = value; }
-        }
+        public int Output { get; set; }
     }
 
     /// <summary>
-    /// The 'AbstractExpression' class
+    ///     The 'AbstractExpression' class
     /// </summary>
-    abstract class Expression
+    internal abstract class Expression
     {
         public void Interpret(Context context)
         {
@@ -47,23 +30,23 @@ namespace Interpreter
 
             if (context.Input.StartsWith(Nine()))
             {
-                context.Output += (9 * Multiplier());
+                context.Output += 9 * Multiplier();
                 context.Input = context.Input.Substring(2);
             }
             else if (context.Input.StartsWith(Four()))
             {
-                context.Output += (4 * Multiplier());
+                context.Output += 4 * Multiplier();
                 context.Input = context.Input.Substring(2);
             }
             else if (context.Input.StartsWith(Five()))
             {
-                context.Output += (5 * Multiplier());
+                context.Output += 5 * Multiplier();
                 context.Input = context.Input.Substring(1);
             }
 
             while (context.Input.StartsWith(One()))
             {
-                context.Output += (1 * Multiplier());
+                context.Output += 1 * Multiplier();
                 context.Input = context.Input.Substring(1);
             }
         }
@@ -76,62 +59,138 @@ namespace Interpreter
     }
 
     /// <summary>
-    /// A 'TerminalExpression' class
-    /// <remarks>
-    /// Thousand checks for the Roman Numeral M 
-    /// </remarks>
+    ///     A 'TerminalExpression' class
+    ///     <remarks>
+    ///         Thousand checks for the Roman Numeral M
+    ///     </remarks>
     /// </summary>
-    class ThousandExpression : Expression
+    internal class ThousandExpression : Expression
     {
-        public override string One() { return "M"; }
-        public override string Four() { return " "; }
-        public override string Five() { return " "; }
-        public override string Nine() { return " "; }
-        public override int Multiplier() { return 1000; }
+        public override string One()
+        {
+            return "M";
+        }
+
+        public override string Four()
+        {
+            return " ";
+        }
+
+        public override string Five()
+        {
+            return " ";
+        }
+
+        public override string Nine()
+        {
+            return " ";
+        }
+
+        public override int Multiplier()
+        {
+            return 1000;
+        }
     }
 
     /// <summary>
-    /// A 'TerminalExpression' class
-    /// <remarks>
-    /// Hundred checks C, CD, D or CM
-    /// </remarks>
+    ///     A 'TerminalExpression' class
+    ///     <remarks>
+    ///         Hundred checks C, CD, D or CM
+    ///     </remarks>
     /// </summary>
-    class HundredExpression : Expression
+    internal class HundredExpression : Expression
     {
-        public override string One() { return "C"; }
-        public override string Four() { return "CD"; }
-        public override string Five() { return "D"; }
-        public override string Nine() { return "CM"; }
-        public override int Multiplier() { return 100; }
+        public override string One()
+        {
+            return "C";
+        }
+
+        public override string Four()
+        {
+            return "CD";
+        }
+
+        public override string Five()
+        {
+            return "D";
+        }
+
+        public override string Nine()
+        {
+            return "CM";
+        }
+
+        public override int Multiplier()
+        {
+            return 100;
+        }
     }
 
     /// <summary>
-    /// A 'TerminalExpression' class
-    /// <remarks>
-    /// Ten checks for X, XL, L and XC
-    /// </remarks>
+    ///     A 'TerminalExpression' class
+    ///     <remarks>
+    ///         Ten checks for X, XL, L and XC
+    ///     </remarks>
     /// </summary>
-    class TenExpression : Expression
+    internal class TenExpression : Expression
     {
-        public override string One() { return "X"; }
-        public override string Four() { return "XL"; }
-        public override string Five() { return "L"; }
-        public override string Nine() { return "XC"; }
-        public override int Multiplier() { return 10; }
+        public override string One()
+        {
+            return "X";
+        }
+
+        public override string Four()
+        {
+            return "XL";
+        }
+
+        public override string Five()
+        {
+            return "L";
+        }
+
+        public override string Nine()
+        {
+            return "XC";
+        }
+
+        public override int Multiplier()
+        {
+            return 10;
+        }
     }
 
     /// <summary>
-    /// A 'TerminalExpression' class
-    /// <remarks>
-    /// One checks for I, II, III, IV, V, VI, VI, VII, VIII, IX
-    /// </remarks>
+    ///     A 'TerminalExpression' class
+    ///     <remarks>
+    ///         One checks for I, II, III, IV, V, VI, VI, VII, VIII, IX
+    ///     </remarks>
     /// </summary>
-    class OneExpression : Expression
+    internal class OneExpression : Expression
     {
-        public override string One() { return "I"; }
-        public override string Four() { return "IV"; }
-        public override string Five() { return "V"; }
-        public override string Nine() { return "IX"; }
-        public override int Multiplier() { return 1; }
+        public override string One()
+        {
+            return "I";
+        }
+
+        public override string Four()
+        {
+            return "IV";
+        }
+
+        public override string Five()
+        {
+            return "V";
+        }
+
+        public override string Nine()
+        {
+            return "IX";
+        }
+
+        public override int Multiplier()
+        {
+            return 1;
+        }
     }
 }

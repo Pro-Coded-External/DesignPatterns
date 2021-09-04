@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "State", "State\State.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateMethod", "TemplateMethod\TemplateMethod.csproj", "{E7AA4325-5787-44B9-9CED-2F5275D5543C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interpreter", "Interpreter\Interpreter.csproj", "{F17100BC-5EA9-4C5C-BCA6-47700D7A959D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,10 @@ Global
 		{E7AA4325-5787-44B9-9CED-2F5275D5543C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7AA4325-5787-44B9-9CED-2F5275D5543C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7AA4325-5787-44B9-9CED-2F5275D5543C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F17100BC-5EA9-4C5C-BCA6-47700D7A959D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F17100BC-5EA9-4C5C-BCA6-47700D7A959D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F17100BC-5EA9-4C5C-BCA6-47700D7A959D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F17100BC-5EA9-4C5C-BCA6-47700D7A959D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
