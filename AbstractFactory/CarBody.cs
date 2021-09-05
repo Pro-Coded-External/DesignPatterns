@@ -3,7 +3,7 @@
     /// <summary>
     ///     An abstract product.
     /// </summary>
-    internal abstract class Sandwich
+    internal abstract class CarBody
     {
     }
 }

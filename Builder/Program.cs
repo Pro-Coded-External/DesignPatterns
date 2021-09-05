@@ -6,23 +6,22 @@ namespace Builder
     {
         private static void Main(string[] args)
         {
-            SandwichBuilder builder;
+            CarBuilder carBuilder;
 
-            // Create deli with sandwich assembly line
-            var shop = new AssemblyLine();
+            var assemblyLine = new AssemblyLine();
 
             // Construct and display sandwiches
-            builder = new HamAndCheese();
-            shop.Assemble(builder);
-            builder.Sandwich.Show();
+            carBuilder = new HatchBack();
+            assemblyLine.Assemble(carBuilder);
+            carBuilder.Car.Show();
 
-            builder = new BLT();
-            shop.Assemble(builder);
-            builder.Sandwich.Show();
+            carBuilder = new Coupe();
+            assemblyLine.Assemble(carBuilder);
+            carBuilder.Car.Show();
 
-            builder = new TurkeyClub();
-            shop.Assemble(builder);
-            builder.Sandwich.Show();
+            carBuilder = new Estate();
+            assemblyLine.Assemble(carBuilder);
+            carBuilder.Car.Show();
 
             // Wait for user
             Console.ReadKey();

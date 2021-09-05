@@ -10,172 +10,172 @@ namespace Builder
     {
         // Builder uses a complex series of steps
         // 
-        public void Assemble(SandwichBuilder sandwichBuilder)
+        public void Assemble(CarBuilder carBuilder)
         {
-            sandwichBuilder.AddBread();
-            sandwichBuilder.AddMeats();
-            sandwichBuilder.AddCheese();
-            sandwichBuilder.AddVeggies();
-            sandwichBuilder.AddCondiments();
+            carBuilder.AddFrame();
+            carBuilder.AddEngine();
+            carBuilder.AddWheels();
+            carBuilder.AddDoors();
+            carBuilder.Paint();
         }
     }
 
     /// <summary>
     ///     The Builder abstract class
     /// </summary>
-    internal abstract class SandwichBuilder
+    internal abstract class CarBuilder
     {
-        protected Sandwich sandwich;
+        protected Car car;
 
         // Gets sandwich instance
-        public Sandwich Sandwich => sandwich;
+        public Car Car => car;
 
         // Abstract build methods
-        public abstract void AddBread();
-        public abstract void AddMeats();
-        public abstract void AddCheese();
-        public abstract void AddVeggies();
-        public abstract void AddCondiments();
+        public abstract void AddFrame();
+        public abstract void AddEngine();
+        public abstract void AddWheels();
+        public abstract void AddDoors();
+        public abstract void Paint();
     }
 
     /// <summary>
     ///     A Concrete Builder class
     /// </summary>
-    internal class TurkeyClub : SandwichBuilder
+    internal class Estate : CarBuilder
     {
-        public TurkeyClub()
+        public Estate()
         {
-            sandwich = new Sandwich("Turkey Club");
+            car = new Car("Estate");
         }
 
-        public override void AddBread()
+        public override void AddFrame()
         {
-            sandwich["bread"] = "12-Grain";
+            car["frame"] = "Long";
         }
 
-        public override void AddMeats()
+        public override void AddEngine()
         {
-            sandwich["meat"] = "Turkey";
+            car["engine"] = "Diesel";
         }
 
-        public override void AddCheese()
+        public override void AddWheels()
         {
-            sandwich["cheese"] = "Swiss";
+            car["wheels"] = "Standard";
         }
 
-        public override void AddVeggies()
+        public override void AddDoors()
         {
-            sandwich["veggies"] = "Lettuce, Tomato";
+            car["doors"] = "Four";
         }
 
-        public override void AddCondiments()
+        public override void Paint()
         {
-            sandwich["condiments"] = "Mayo";
-        }
-    }
-
-    /// <summary>
-    ///     A Concrete Builder class
-    /// </summary>
-    internal class BLT : SandwichBuilder
-    {
-        public BLT()
-        {
-            sandwich = new Sandwich("BLT");
-        }
-
-        public override void AddBread()
-        {
-            sandwich["bread"] = "Wheat";
-        }
-
-        public override void AddMeats()
-        {
-            sandwich["meat"] = "Bacon";
-        }
-
-        public override void AddCheese()
-        {
-            sandwich["cheese"] = "None";
-        }
-
-        public override void AddVeggies()
-        {
-            sandwich["veggies"] = "Lettuce, Tomato";
-        }
-
-        public override void AddCondiments()
-        {
-            sandwich["condiments"] = "Mayo, Mustard";
+            car["paint"] = "Black";
         }
     }
 
     /// <summary>
     ///     A Concrete Builder class
     /// </summary>
-    internal class HamAndCheese : SandwichBuilder
+    internal class Coupe : CarBuilder
     {
-        public HamAndCheese()
+        public Coupe()
         {
-            sandwich = new Sandwich("Ham and Cheese");
+            car = new Car("Coupe");
         }
 
-        public override void AddBread()
+        public override void AddFrame()
         {
-            sandwich["bread"] = "White";
+            car["frame"] = "Sports";
         }
 
-        public override void AddMeats()
+        public override void AddEngine()
         {
-            sandwich["meat"] = "Ham";
+            car["engine"] = "V8";
         }
 
-        public override void AddCheese()
+        public override void AddWheels()
         {
-            sandwich["cheese"] = "American";
+            car["wheels"] = "Alloy";
         }
 
-        public override void AddVeggies()
+        public override void AddDoors()
         {
-            sandwich["veggies"] = "None";
+            car["doors"] = "Two";
         }
 
-        public override void AddCondiments()
+        public override void Paint()
         {
-            sandwich["condiments"] = "Mayo";
+            car["paint"] = "Red";
+        }
+    }
+
+    /// <summary>
+    ///     A Concrete Builder class
+    /// </summary>
+    internal class HatchBack : CarBuilder
+    {
+        public HatchBack()
+        {
+            car = new Car("HatchBack");
+        }
+
+        public override void AddFrame()
+        {
+            car["frame"] = "Standard";
+        }
+
+        public override void AddEngine()
+        {
+            car["engine"] = "Electric";
+        }
+
+        public override void AddWheels()
+        {
+            car["wheels"] = "Standard";
+        }
+
+        public override void AddDoors()
+        {
+            car["doors"] = "Five";
+        }
+
+        public override void Paint()
+        {
+            car["paint"] = "Blue";
         }
     }
 
     /// <summary>
     ///     The Product class
     /// </summary>
-    internal class Sandwich
+    internal class Car
     {
-        private readonly Dictionary<string, string> _ingredients = new();
-        private readonly string _sandwichType;
+        private readonly Dictionary<string, string> _parts = new();
+        private readonly string _carType;
 
         // Constructor
-        public Sandwich(string sandwichType)
+        public Car(string carType)
         {
-            _sandwichType = sandwichType;
+            _carType = carType;
         }
 
         // Indexer
         public string this[string key]
         {
-            get => _ingredients[key];
-            set => _ingredients[key] = value;
+            get => _parts[key];
+            set => _parts[key] = value;
         }
 
         public void Show()
         {
             Console.WriteLine("\n---------------------------");
-            Console.WriteLine("Sandwich: {0}", _sandwichType);
-            Console.WriteLine(" Bread: {0}", _ingredients["bread"]);
-            Console.WriteLine(" Meat: {0}", _ingredients["meat"]);
-            Console.WriteLine(" Cheese: {0}", _ingredients["cheese"]);
-            Console.WriteLine(" Veggies: {0}", _ingredients["veggies"]);
-            Console.WriteLine(" Condiments: {0}", _ingredients["condiments"]);
+            Console.WriteLine("Car: {0}", _carType);
+            Console.WriteLine(" Frame: {0}", _parts["frame"]);
+            Console.WriteLine(" engine: {0}", _parts["engine"]);
+            Console.WriteLine(" wheels: {0}", _parts["wheels"]);
+            Console.WriteLine(" doors: {0}", _parts["doors"]);
+            Console.WriteLine(" paint: {0}", _parts["paint"]);
         }
     }
 }

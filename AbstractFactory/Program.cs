@@ -1,4 +1,5 @@
 ﻿using System;
+using AbstractFactory.ConfiguratorFactories;
 
 namespace AbstractFactory
 {
@@ -12,31 +13,24 @@ namespace AbstractFactory
         /// <param name="args"></param>
         private static void Main(string[] args)
         {
-            Console.WriteLine("Who are you? (A)dult or (C)hild?");
+            Console.WriteLine("Select country: (U)k, (S)weden or (D)enmark");
 
             var input = char.ToLower(Console.ReadKey().KeyChar);
 
-            RecipeFactory factory;
-
-            switch (input)
+            CarConfiguratorFactory factory = input switch
             {
-                case 'a':
-                    factory = new AdultCuisineFactory();
-                    break;
+                'u' => new UkConfiguratorFactory(),
+                's' => new SwedenConfiguratorFactory(),
+                'd' => new DenmarkConfiguratorFactory(),
+                _ => throw new NotImplementedException("Unsupported market.")
+            };
 
-                case 'c':
-                    factory = new KidCuisineFactory();
-                    break;
+            var carBody = factory.CreateCarBody();
+            var engine = factory.CreateEngine();
 
-                default:
-                    throw new NotImplementedException();
-            }
-
-            var sandwich = factory.CreateSandwich();
-            var dessert = factory.CreateDessert();
-
-            Console.WriteLine("\nSandwich: " + sandwich.GetType().Name);
-            Console.WriteLine("Dessert: " + dessert.GetType().Name);
+            Console.WriteLine();
+            Console.WriteLine("Car Body: " + carBody.GetType().Name);
+            Console.WriteLine("Engine: " + engine.GetType().Name);
 
             Console.ReadKey();
         }

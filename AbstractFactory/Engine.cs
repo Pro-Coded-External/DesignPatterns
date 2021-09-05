@@ -1,9 +1,9 @@
 ﻿namespace AbstractFactory
 {
     /// <summary>
-    ///     A concrete product
+    ///     An abstract product.
     /// </summary>
-    internal class BLT : Sandwich
+    internal abstract class Engine
     {
     }
 }

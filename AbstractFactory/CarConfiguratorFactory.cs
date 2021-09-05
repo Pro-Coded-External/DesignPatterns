@@ -3,9 +3,9 @@
     /// <summary>
     ///     The Abstract Factory class, which defines methods for creating abstract objects.
     /// </summary>
-    internal abstract class RecipeFactory
+    internal abstract class CarConfiguratorFactory
     {
-        public abstract Sandwich CreateSandwich();
-        public abstract Dessert CreateDessert();
+        public abstract CarBody CreateCarBody();
+        public abstract Engine CreateEngine();
     }
 }

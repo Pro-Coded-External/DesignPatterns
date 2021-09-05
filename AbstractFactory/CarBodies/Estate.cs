@@ -1,9 +1,9 @@
-﻿namespace AbstractFactory
+﻿namespace AbstractFactory.CarBodies
 {
     /// <summary>
     ///     A concrete product
     /// </summary>
-    internal class CremeBrulee : Dessert
+    internal class Estate : CarBody
     {
     }
 }

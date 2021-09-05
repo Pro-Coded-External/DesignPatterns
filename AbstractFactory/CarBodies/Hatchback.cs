@@ -1,9 +1,9 @@
-﻿namespace AbstractFactory
+﻿namespace AbstractFactory.CarBodies
 {
     /// <summary>
     ///     A concrete product
     /// </summary>
-    internal class PBandJ : Sandwich
+    internal class Hatchback : CarBody
     {
     }
 }
